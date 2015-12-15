@@ -1,9 +1,11 @@
 #!/bin/bash
 # Version: 0.1.0
-# Last Update: November 30, 2015
-# Description: Bash script to deploy a Bedrock+Sage project to WP Engine's hosting platform
-# Repo: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine.git
-# README: Coming soon
+# Last Update: December 14, 2015
+#
+# Description: Bash script to deploy a Bedrock+Sage WordPress project to WP Engine's hosting platform
+# Repository: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine.git
+# README: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine/blob/master/README.md
+#
 # Tested Bedrock Version: 1.4.5
 # Tested Sage Version: 8.3.0
 # Author: Jason Cross
