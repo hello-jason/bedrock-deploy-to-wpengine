@@ -21,11 +21,11 @@ Out the box, this script assumes your theme's name is **wpengine** and your git 
 * Set `themeName` to the **directory name** of your theme (/app/themes/**yourthemename**)
 * Set `wpengineRemoteName` to the **origin** you created when setting up git push in your WP Engine account
 
----
-
-## Usage
+### 3. Run script
 
 In short, it performs a few checks, creates a temporary deployment branch, then builds the site **locally**. It force pushes to the specified environment using WP Engine's git push feature. When complete, it removes the temp branch and puts you back on the branch you started from.
+
+Run at the **top level** of your project, in the same directory as your `.env` and composer.json files.
 
 Deploy to staging:
 
