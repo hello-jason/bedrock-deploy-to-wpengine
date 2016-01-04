@@ -78,6 +78,7 @@ git checkout -b "$tempDeployGitBranch" &> /dev/null
 
 # Copy contents of web/app into wp-content
 cp -r web/app wp-content &> /dev/null
+rm -rf web &> /dev/null
 
 # Remove Bedrock's mu-plugins
 rm "wp-content/mu-plugins/bedrock-autoloader.php" &> /dev/null
