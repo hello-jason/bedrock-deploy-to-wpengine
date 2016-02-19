@@ -1,3 +1,5 @@
+**Warning: this script still has a few kinks to work out. Only test on a repo that has been properly backed up.**
+
 # Deploy Bedrock+Sage WordPress project to WP Engine hosting platform
 
 This bash script prepares a WordPress project [Bedrock](https://roots.io/bedrock/) boilerplate with the [Sage](https://roots.io/sage/) starter theme **to the WP Engine hosting platform**.
