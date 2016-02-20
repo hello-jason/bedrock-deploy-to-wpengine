@@ -6,9 +6,9 @@
 # Repository: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine.git
 # README: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine/blob/master/README.md
 #
-# Tested bash version: 4.2.1
-# Tested Bedrock Version: 1.4.5
-# Tested Sage Version: 8.3.0
+# Tested Bedrock Version: 1.5.3
+# Tested Sage Version: 8.4.2
+# Tested bash version: 4.3.42
 # Author: Jason Cross
 # Author URL: http://hellojason.net/
 
@@ -16,21 +16,13 @@
 # Thanks
 ####################
 # Thanks to [schrapel](https://github.com/schrapel/wpengine-bedrock-build) for
-# providing much of the foundation for this script.
-
-####################
-# Issues and TODO
-####################
-
-# check if bower, npm, gulp are installed
-# check if current user can deploy to WP Engine (has ssh key)
-# check if composer has been run
-# check if remote exists
+# providing some of the foundation for this script.
+# Also thanks to [cmckni3](https://github.com/cmckni3) for
 
 ####################
 # PLEASE EDIT
 # Your theme directory name here
-themeName="wpengine"
+themeName="sage"
 # Your WP Engine remote name
 wpengineRemoteName="wpengine"
 ####################

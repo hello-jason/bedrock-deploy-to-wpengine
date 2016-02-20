@@ -1,8 +1,8 @@
-**Warning: this script still has a few kinks to work out. Only test on a repo that has been properly backed up.**
-
 # Deploy Bedrock+Sage WordPress project to WP Engine hosting platform
 
-This bash script prepares a WordPress project [Bedrock](https://roots.io/bedrock/) boilerplate with the [Sage](https://roots.io/sage/) starter theme **to the WP Engine hosting platform**.
+This bash script prepares a WordPress project using the [Bedrock](https://roots.io/bedrock/) boilerplate with the [Sage](https://roots.io/sage/) starter theme **to the WP Engine hosting platform**.
+
+Demo: [http://bedrocksage.wpengine.com/](http://bedrocksage.wpengine.com/)
 
 ## Purpose
 
@@ -16,7 +16,7 @@ Follow [these instructions from WP Engine](https://wpengine.com/git/) to setup S
 
 ### 2. Set variables
 
-Out the box, this script assumes your theme's name is **wpengine** and your git remote's name is also **wpengine**. Open `wpdeploy.sh` and change the following variables for your application (around line 29).
+Out the box, this script assumes your theme's name is **sage** and your git remote's name is also **wpengine**. Open `wpdeploy.sh` and change the following variables for your application (around line 25).
 
 * Set `themeName` to the **directory name** of your theme (/app/themes/**yourthemename**)
 * Set `wpengineRemoteName` to the **origin** you created when setting up git push in your WP Engine account
@@ -30,16 +30,17 @@ Run at the **top level** of your project, in the same directory as your `.env` a
 Deploy to staging:
 
 ```
-sh wpedeploy.sh staging
+bash sh wpedeploy.sh staging
 ```
 
 Deploy to production:
 
 ```
-sh wpedeploy.sh production
+bash sh wpedeploy.sh production
 ```
 
 ## Notes
 
 * Deploys the local branch you run it on to whichever remote WP Engine branch you specify (production or staging)
 * Completely ignores the uploads directory
+* Ubuntu defaults to `dash` rather then `bash`, so the `bash` command is important here. There are issues running this with `dash`.
