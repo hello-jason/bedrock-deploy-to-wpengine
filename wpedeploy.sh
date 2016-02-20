@@ -6,6 +6,7 @@
 # Repository: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine.git
 # README: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine/blob/master/README.md
 #
+# Tested bash version: 4.2.1
 # Tested Bedrock Version: 1.4.5
 # Tested Sage Version: 8.3.0
 # Author: Jason Cross
