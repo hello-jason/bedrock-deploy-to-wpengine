@@ -14,12 +14,11 @@ WP Engine expects to see a standard WordPress project in the document root for y
 
 Follow [these instructions from WP Engine](https://wpengine.com/git/) to setup SSH access and git push for your WP Engine account.
 
-### 2. Set variables
+### 2. Set theme variable
 
-Out the box, this script assumes your theme's name is **sage** and your git remote's name is also **wpengine**. Open `wpdeploy.sh` and change the following variables for your application (around line 25).
+Out the box, this script assumes your theme's name is **sage**. Open `wpdeploy.sh` and change the following variable (around line 17).
 
 * Set `themeName` to the **directory name** of your theme (/app/themes/**yourthemename**)
-* Set `wpengineRemoteName` to the **origin** you created when setting up git push in your WP Engine account
 
 ### 3. Run script
 
