@@ -1,5 +1,5 @@
 #!/bin/bash
-# Version: 0.2.1
+# Version: 0.3.0
 # Last Update: December 14, 2015
 #
 # Description: Bash script to deploy a Bedrock+Sage WordPress project to WP Engine's hosting platform
@@ -11,61 +11,74 @@
 # Tested bash version: 4.3.42
 # Author: Jason Cross
 # Author URL: http://hellojason.net/
+set -ex
+########################################
+# PLEASE EDIT
+# Your theme directory name (/web/app/themes/yourtheme)
+themeName="sage"
+# Your WP Engine remote names
+wpengineProductionRemote="wpeproduction"
+wpengineStagingRemote="wpestaging"
+########################################
+
+####################
+# Usage
+####################
+# bash wpedeploy.sh nameOfRemote
 
 ####################
 # Thanks
 ####################
 # Thanks to [schrapel](https://github.com/schrapel/wpengine-bedrock-build) for
 # providing some of the foundation for this script.
-# Also thanks to [cmckni3](https://github.com/cmckni3) for
+# Also thanks to [cmckni3](https://github.com/cmckni3) for guidance and troubleshooting
 
 ####################
-# PLEASE EDIT
-# Your theme directory name here
-themeName="sage"
-# Your WP Engine remote name
-wpengineRemoteName="wpengine"
+# Set variables
 ####################
-
-####################
-# Variables
-####################
-environmentDeployTo=$1
+# WP Engine remote to deploy to
+remoteDeployTo=$1
+# Get present working directory
 presentWorkingDirectory=`pwd`
+# Get current branch user is on
 currentLocalGitBranch=`git rev-parse --abbrev-ref HEAD`
+# Temporary git branch for building and deploying
 tempDeployGitBranch="wpedeployscript/${currentLocalGitBranch}"
-sageThemeDirectory="${presentWorkingDirectory}/wp-content/themes/${themeName}"
+# Bedrock themes directory
+bedrockThemesDirectory="${presentWorkingDirectory}/wp-content/themes/"
+# Path to theme directory
+sageThemeDirectory="${bedrockThemesDirectory}/${themeName}"
 
 ####################
 # Perform checks before running script
 ####################
 
+# Git checks
+####################
 # Halt if there are uncommitted files
 if [[ -n $(git status -s) ]]; then
-  echo -e "ERROR: Found uncommitted changes.\nPlease review and commit your changes before continuing."
-  exit
+  echo -e "[\033[31mERROR\e[0m] Found uncommitted changes on current branch \"$currentLocalGitBranch\".\n        Review and commit changes to continue."
+  exit 1;
 fi
 
+# Check if specified remote exist
+git ls-remote "$remoteDeployTo" &> /dev/null
+if [ "$?" -ne 0 ]; then
+  echo -e "[\033[31mERROR\e[0m] Unable to read from git remote \"$remoteDeployTo\"\n        Visit \033[32mhttps://wpengine.com/git/\e[0m to set this up."
+  exit 1;
+fi
+
+# Directory checks
+####################
 # Halt if theme directory does not exist
 if [ ! -d "$presentWorkingDirectory"/web/app/themes/"$themeName" ]; then
-  echo -e "ERROR: Theme not found.\nPlease edit themeName variable in $0."
-  exit
-fi
-
-# Check for meaningful deploy environment and set variables for later use
-if [ "$environmentDeployTo" == "staging" ]; then
-  deployRemoteBranch="staging" &> /dev/null
-elif [ "$environmentDeployTo" = "production" ]; then
-  deployRemoteBranch="master" &> /dev/null
-else
-  echo -e "ERROR: Unknown deploy environment.\nPlease specify \`sh $0 staging\` or \`sh $0 production\`."
-  exit
+  echo -e "[\033[31mERROR\e[0m] Theme \"$themeName\" not found.\n        Set \033[32mthemeName\e[0m variable in $0 to match your theme in $bedrockThemesDirectory"
+  exit 1
 fi
 
 ####################
 # Begin deploy process
 ####################
-
 # Checkout new temporary branch
 git checkout -b "$tempDeployGitBranch" &> /dev/null
 
@@ -123,7 +136,7 @@ echo "Pushing to WPEngine..."
 
 # Push to a remote branch with a different name
 # git push remoteName localBranch:remoteBranch
-git push "$wpengineRemoteName" "$tempDeployGitBranch":"$environmentDeployTo" --force
+git push "$wpengineRemoteName" "$tempDeployGitBranch" --force
 
 # Back to a clean slate
 git checkout "$currentLocalGitBranch" &> /dev/null
