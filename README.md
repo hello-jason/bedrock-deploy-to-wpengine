@@ -14,6 +14,11 @@ WP Engine expects to see a standard WordPress project in the document root for y
 
 Follow [these instructions from WP Engine](https://wpengine.com/git/) to setup SSH access and git push for your WP Engine account.
 
+This guide assumes your remotes are named as follows:
+
+* **Production**: wpeproduction
+* **Staging**: wpestaging
+
 ### 2. Set theme variable
 
 Out the box, this script assumes your theme's name is **sage**. Open `wpdeploy.sh` and change the following variable (around line 17).
@@ -24,18 +29,18 @@ Out the box, this script assumes your theme's name is **sage**. Open `wpdeploy.s
 
 In short, it performs a few checks, creates a temporary deployment branch, then builds the site **locally**. It force pushes to the specified environment using WP Engine's git push feature. When complete, it removes the temp branch and puts you back on the branch you started from.
 
-Run at the **top level** of your project, in the same directory as your `.env` and composer.json files.
+Run at the **top level** of your project, in the same directory as your `.env` and composer.json files. Replace each remote name with the ones you created during step 1.
 
 Deploy to staging:
 
 ```
-bash sh wpedeploy.sh staging
+bash wpedeploy.sh wpestaging
 ```
 
 Deploy to production:
 
 ```
-bash sh wpedeploy.sh production
+bash wpedeploy.sh wpeproduction
 ```
 
 ## Notes
