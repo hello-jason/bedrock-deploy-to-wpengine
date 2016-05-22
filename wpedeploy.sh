@@ -1,5 +1,5 @@
 #!/bin/bash
-# Version: 0.3.0
+# Version: 0.3.1
 # Last Update: February 21, 2016
 #
 # Description: Bash script to deploy a Bedrock+Sage WordPress project to WP Engine's hosting platform
