@@ -40,7 +40,7 @@ Out the box, this script assumes your theme's name is **sage**. Open `wpdeploy.s
 
 ## Usage
 
-Run at the **top level** of your project, in the same directory as your `.env` and composer.json files. Replace each remote name with the ones you created during step 1.
+Run at the **top level** of your project, in the same directory as your `.env` and `composer.json` files. Replace each remote name with the ones you created during step 1.
 
 Deploy to staging:
 
@@ -60,4 +60,4 @@ bash wpedeploy.sh wpeproduction
 * **What about the uploads directory?** - Completely ignores the uploads directory. You'll have to upload that separately [via SFTP](https://wpengine.com/support/sftp/).
 * **How does it handle plugin versions?** - You can upgrade or downgrade version numbers in the `composer.json` file, run `composer update`, then run this script to deploy the new version to WP Engine. However, this script **will not delete** plugins from WP Engine's servers; you will have to do that via SFTP or wp-admin.
 * **What about WordPress core?** - This script only deploys the contents of `wp-content` to WP Engine's servers. You should keep WordPress core updated in your composer file, but that only benefits your local dev environment. You will manage WP core for your publicly-facing site in WP Engine's interface directly.
-* **Why doesn't it work on Ubuntu?** - Ubuntu defaults to `dash` rather than `bash`, and the script may fail if you simply run `sh`. Other distros may do the same, so running this script with the `bash` command is important.
+* **Why doesn't it work on Ubuntu?** - It does! But Ubuntu defaults to `dash` rather than `bash`, and the script may fail if you simply run `sh`. Other distros may do the same, so running this script with the `bash` command is important.
