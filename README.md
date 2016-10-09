@@ -1,6 +1,8 @@
 # Deploy Bedrock+Sage WordPress project to WP Engine hosting platform
 
-Last tested: May 22, 2016
+Last tested: October 8, 2016
+Bedrock 1.7.2
+Sage 8.5
 
 Repo: [https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine](https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine)
 
