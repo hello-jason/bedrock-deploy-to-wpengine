@@ -11,12 +11,6 @@
 # Author: Jason Cross
 # Author URL: http://hellojason.net/
 ########################################
-# PLEASE EDIT
-# Your theme directory name (/web/app/themes/yourtheme)
-themeName="sage"
-########################################
-
-####################
 # Usage
 ####################
 # bash wpedeploy.sh nameOfRemote
@@ -64,16 +58,6 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-# Directory checks
-####################
-# Halt if theme directory does not exist
-if [ ! -d "$presentWorkingDirectory"/web/app/themes/"$themeName" ]; then
-  echo -e "[\033[31mERROR\e[0m] Theme \"$themeName\" not found.\n        Set \033[32mthemeName\e[0m variable in $0 to match your theme in $bedrockThemesDirectory"
-  echo "Available themes:"
-  ls $bedrockThemesDirectory
-  exit 1
-fi
-
 ####################
 # Begin deploy process
 ####################
@@ -90,41 +74,6 @@ echo -e "/*\n!wp-content/" > ./.gitignore
 
 # Copy meaningful contents of web/app into wp-content
 mkdir wp-content && cp -rp web/app/plugins wp-content && cp -rp web/app/themes wp-content
-
-# Go into theme directory
-cd "$presentWorkingDirectory/wp-content/themes/$themeName" &> /dev/null
-
-# Build theme assets
-npm install && bower install && gulp --production
-
-# Back to the top
-cd "$presentWorkingDirectory"
-
-# Cleanup wp-content
-####################
-# Remove sage theme cruft
-# Files
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.bowerrc &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.editorconfig &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.gitignore &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.jscsrc &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.jshintrc &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.travis.yml &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/bower.json &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/gulpfile.js &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/package.json &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/composer.json &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/composer.lock &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/ruleset.xml &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/CHANGELOG.md &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/CONTRIBUTING.md &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/LICENSE.md &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/README.md &> /dev/null
-# Directories
-rm -rf "$presentWorkingDirectory"/wp-content/themes/"$themeName"/node_modules &> /dev/null
-rm -rf "$presentWorkingDirectory"/wp-content/themes/"$themeName"/bower_components &> /dev/null
-rm -rf "$presentWorkingDirectory"/wp-content/themes/"$themeName"/assets &> /dev/null
-rm -rf "$presentWorkingDirectory"/wp-content/themes/"$themeName"/vendor &> /dev/null
 
 ####################
 # Push to WP Engine
