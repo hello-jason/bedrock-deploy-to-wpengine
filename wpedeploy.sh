@@ -93,12 +93,12 @@ function deploy () {
   # cd "$presentWorkingDirectory"
 
   git add --all &> /dev/null
-  git commit -m "Automated deploy of $tempDeployGitBranch branch on $(timestamp)" &> /dev/null
+  git commit -m "Automated deploy of \"$tempDeployGitBranch\" branch on $(timestamp)" &> /dev/null
   echo "Pushing to WP Engine..."
 
   # Push to a remote branch with a different name
   # git push remoteName localBranch:remoteBranch
-  # git push "$wpengineRemoteName" "$tempDeployGitBranch":master --force
+  git push "$wpengineRemoteName" "$tempDeployGitBranch":master --force
 
   ########################################
   # Back to a clean slate
@@ -106,7 +106,7 @@ function deploy () {
   git checkout "$currentLocalGitBranch" &> /dev/null
   rm -rf wp-content/ &> /dev/null
   git branch -D "$tempDeployGitBranch" &> /dev/null
-  echo "Done"
+  echo -e "[\033[32mDone\e[0m] Deployed \"$tempDeployGitBranch\" to \"$wpengineRemoteName\""
 }
 
 ########################################
@@ -116,4 +116,5 @@ function deploy () {
 check_uncommited_files
 check_remote_exists
 # Deploy process
+set -x
 deploy
