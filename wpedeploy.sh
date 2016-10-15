@@ -116,5 +116,4 @@ function deploy () {
 check_uncommited_files
 check_remote_exists
 # Deploy process
-set -x
 deploy
