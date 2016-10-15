@@ -1,23 +1,16 @@
 #!/bin/bash
-# Version: 0.3.1
-# Last Update: February 21, 2016
+# Version: 2.0.0
+# Last Update: October 15, 2016
 #
-# Description: Bash script to deploy a Bedrock+Sage WordPress project to WP Engine's hosting platform
-# Repository: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine.git
-# README: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine/blob/master/README.md
+# Description: Bash script to deploy a Bedrock WordPress project to WP Engine's hosting platform
+# Repository: https://github.com/hello-jason/bedrock-deploy-to-wpengine.git
+# README: https://github.com/hello-jason/bedrock-deploy-to-wpengine/blob/master/README.md
 #
-# Tested Bedrock Version: 1.5.3
-# Tested Sage Version: 8.4.2
+# Tested Bedrock Version: 1.7.2
 # Tested bash version: 4.3.42
 # Author: Jason Cross
 # Author URL: http://hellojason.net/
 ########################################
-# PLEASE EDIT
-# Your theme directory name (/web/app/themes/yourtheme)
-themeName="sage"
-########################################
-
-####################
 # Usage
 ####################
 # bash wpedeploy.sh nameOfRemote
@@ -65,16 +58,6 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-# Directory checks
-####################
-# Halt if theme directory does not exist
-if [ ! -d "$presentWorkingDirectory"/web/app/themes/"$themeName" ]; then
-  echo -e "[\033[31mERROR\e[0m] Theme \"$themeName\" not found.\n        Set \033[32mthemeName\e[0m variable in $0 to match your theme in $bedrockThemesDirectory"
-  echo "Available themes:"
-  ls $bedrockThemesDirectory
-  exit 1
-fi
-
 ####################
 # Begin deploy process
 ####################
@@ -91,41 +74,6 @@ echo -e "/*\n!wp-content/" > ./.gitignore
 
 # Copy meaningful contents of web/app into wp-content
 mkdir wp-content && cp -rp web/app/plugins wp-content && cp -rp web/app/themes wp-content
-
-# Go into theme directory
-cd "$presentWorkingDirectory/wp-content/themes/$themeName" &> /dev/null
-
-# Build theme assets
-npm install && bower install && gulp --production
-
-# Back to the top
-cd "$presentWorkingDirectory"
-
-# Cleanup wp-content
-####################
-# Remove sage theme cruft
-# Files
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.bowerrc &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.editorconfig &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.gitignore &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.jscsrc &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.jshintrc &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/.travis.yml &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/bower.json &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/gulpfile.js &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/package.json &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/composer.json &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/composer.lock &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/ruleset.xml &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/CHANGELOG.md &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/CONTRIBUTING.md &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/LICENSE.md &> /dev/null
-rm "$presentWorkingDirectory"/wp-content/themes/"$themeName"/README.md &> /dev/null
-# Directories
-rm -rf "$presentWorkingDirectory"/wp-content/themes/"$themeName"/node_modules &> /dev/null
-rm -rf "$presentWorkingDirectory"/wp-content/themes/"$themeName"/bower_components &> /dev/null
-rm -rf "$presentWorkingDirectory"/wp-content/themes/"$themeName"/assets &> /dev/null
-rm -rf "$presentWorkingDirectory"/wp-content/themes/"$themeName"/vendor &> /dev/null
 
 ####################
 # Push to WP Engine
