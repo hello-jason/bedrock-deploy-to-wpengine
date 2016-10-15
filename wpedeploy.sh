@@ -1,10 +1,10 @@
 #!/bin/bash
 # Version: 2.0.0
-# Last Update: October 13, 2016
+# Last Update: October 15, 2016
 #
 # Description: Bash script to deploy a Bedrock WordPress project to WP Engine's hosting platform
-# Repository: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine.git
-# README: https://github.com/hello-jason/bedrock-sage-deploy-to-wpengine/blob/master/README.md
+# Repository: https://github.com/hello-jason/bedrock-deploy-to-wpengine.git
+# README: https://github.com/hello-jason/bedrock-deploy-to-wpengine/blob/master/README.md
 #
 # Tested Bedrock Version: 1.7.2
 # Tested bash version: 4.3.42
