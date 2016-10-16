@@ -27,14 +27,10 @@
 ########################################
 # WP Engine remote to deploy to
 wpengineRemoteName=$1
-# Get present working directory
-presentWorkingDirectory=`pwd`
 # Get current branch user is on
 currentLocalGitBranch=`git rev-parse --abbrev-ref HEAD`
 # Temporary git branch for building and deploying
 tempDeployGitBranch="wpedeployscript/${currentLocalGitBranch}"
-# Bedrock themes directory
-bedrockThemesDirectory="${presentWorkingDirectory}/web/app/themes/"
 
 ########################################
 # Perform checks before running script
@@ -85,15 +81,14 @@ function deploy () {
   # Push to WP Engine
   ########################################
   # WPE-friendly gitignore
-  echo -e "# Ignore everything\n*\n# Except this...\n\!wp-content" > .gitignore
-  git rm --cached $(git ls-files) &> /dev/null
+  echo -e "# Ignore everything\n/*\n\n# Except this...\n!wp-content/\n!wp-content/**/*" > .gitignore
+  git rm -r --cached . &> /dev/null
   # Find and remove nested git repositories
-  # cd "$presentWorkingDirectory"/wp-content
-  # find . | grep .git | xargs rm -rf
-  # cd "$presentWorkingDirectory"
+  rm -rf $(find wp-content -name ".git")
+  rm -rf $(find wp-content -name ".github")
 
-  git add --all &> /dev/null
-  git commit -m "Automated deploy of \"$tempDeployGitBranch\" branch on $(timestamp)" &> /dev/null
+  git add --all
+  git commit -m "Automated deploy of \"$tempDeployGitBranch\" branch on $(timestamp)"
   echo "Pushing to WP Engine..."
 
   # Push to a remote branch with a different name
@@ -116,4 +111,5 @@ function deploy () {
 check_uncommited_files
 check_remote_exists
 # Deploy process
+set -x
 deploy
