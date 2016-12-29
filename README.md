@@ -1,13 +1,14 @@
 # Deploy Roots Bedrock WordPress project to WP Engine hosting platform
 
-Works up to Bedrock 1.7.2
+Works up to Bedrock 1.7.2. Deploys themes, plugins, and mu-plugins.
 
 Repo: [https://github.com/hello-jason/bedrock-deploy-to-wpengine](https://github.com/hello-jason/bedrock-deploy-to-wpengine)
 
 ## Changelog
 
-v2 - Removes build process for Sage theme. Now focuses purely on deploying your Bedrock project, regardless of theme.
-v1 - Works up to Bedrock 1.7.2, Sage 8.5
+v2 - Removes build process for Sage theme. Now focuses purely on deploying your Bedrock project, regardless of theme. Grab the branch `master`.
+
+v1 - Works up to Bedrock 1.7.2, Sage 8.5. Grab the branch `release/1.0.0`.
 
 ## Description
 
